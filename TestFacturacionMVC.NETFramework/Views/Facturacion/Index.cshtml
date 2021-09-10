@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Buscar facturas";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+
+<form action="/Facturacion/Buscar" method="post">
+    <label class="control-label col-md-2">Id de la Factura</label>
+    <input type="number" id="id" name="id" />
+    <input type="submit" value="Buscar" />
+</form>

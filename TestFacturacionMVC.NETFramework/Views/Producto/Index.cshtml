@@ -1,0 +1,81 @@
+﻿@model TestFacturacionMVC.NETFramework.Models.Producto
+
+@{
+    ViewBag.Title = "Productos";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Agregar nuevo producto", "Create")
+</p>
+
+<div class="form-horizontal">
+    <hr />
+    <div class="form-group">
+
+        <div class="col-lg-offset-1 col-md-6">
+            <form action="/Producto/Buscar" method="post">
+                <label class="control-label col-md-2">Producto</label>
+                <input type="text" id="produc" name="produc" /><br>
+                <input type="submit" value="Buscar" class="btn btn-default" />
+            </form>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">Producto</label>
+            <div class="col-md-10">
+                @Html.DropDownList("pkIdProducto", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.pkIdProducto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Buscar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Precio
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in ViewBag.listaproductos as IEnumerable<TestFacturacionMVC.NETFramework.Models.Producto>)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.precio)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.pkIdProducto }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.pkIdProducto }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.pkIdProducto })
+            </td>
+        </tr>
+    }
+</table>
+
+<p>
+    @Html.ActionLink("Ver toda la tabla", "Index")
+</p>

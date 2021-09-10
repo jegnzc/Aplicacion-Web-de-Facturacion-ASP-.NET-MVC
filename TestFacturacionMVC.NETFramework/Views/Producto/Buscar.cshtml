@@ -1,0 +1,44 @@
+﻿@model IEnumerable<TestFacturacionMVC.NETFramework.Models.Producto>
+
+@{
+    ViewBag.Title = "Búsqueda de Producto";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form action="/Producto/Buscar" method="post">
+    <input type="text" id="produc" name="produc" />
+    <input type="submit" value="Buscar" />
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Precio
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.precio)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.pkIdProducto }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.pkIdProducto }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.pkIdProducto })
+            </td>
+        </tr>
+    }
+</table>
+
+<p>
+    @Html.ActionLink("Regresar", "Index")
+</p>

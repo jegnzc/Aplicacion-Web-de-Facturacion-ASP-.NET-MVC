@@ -1,0 +1,68 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Búsqueda de Facturas por medio de su ID";
+}
+
+<h2>@ViewBag.Title</h2>
+<h2>@ViewBag.idCliente</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Cliente
+        </th>
+        <th>
+            Fecha
+        </th>
+    </tr>
+
+    @foreach (var item in Model.cliente as IEnumerable<TestFacturacionMVC.NETFramework.Models.JoinClienteFactura>)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cliente.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.factura.fecha)
+            </td>
+
+            <td>
+            </td>
+        </tr>
+    }
+</table>
+
+<table class="table">
+    <tr>
+        <th>
+            Producto
+        </th>
+        <th>
+            Cantidad
+        </th>
+        <th>
+            Precio
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.detalles as IEnumerable<TestFacturacionMVC.NETFramework.Models.JoinDetalleProducto>)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.producto.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.detalle.cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.producto.precio)
+            </td>
+        </tr>
+    }
+</table>
+
+<p>
+    @Html.ActionLink("Regresar", "Index")
+</p>

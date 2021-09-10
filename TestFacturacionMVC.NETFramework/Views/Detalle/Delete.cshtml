@@ -1,0 +1,46 @@
+﻿@model TestFacturacionMVC.NETFramework.Models.Detalle
+
+@{
+    ViewBag.Title = "Eliminar detalle de factura";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>¿Estás seguro de eliminar este detalle de la factura?</h3>
+<div>
+    <h4>Detalle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Id de Factura
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Factura.pkIdFactura)
+        </dd>
+        <dt>
+            Producto
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Producto.nombre)
+        </dd>
+        <dt>
+            Cantidad
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantidad)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FacturaTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="pkIdCliente" />
+    </Key>
+    <Property Name="pkIdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Factura" Relationship="Self.fkFacturaCliente" FromRole="Cliente" ToRole="Factura" />
+  </EntityType>
+  <EntityType Name="Detalle">
+    <Key>
+      <PropertyRef Name="pkIdDetalle" />
+    </Key>
+    <Property Name="pkIdDetalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fkIdProducto" Type="Int32" />
+    <Property Name="fkIdFactura" Type="Int32" />
+    <Property Name="cantidad" Type="Int32" />
+    <NavigationProperty Name="Factura" Relationship="Self.fkDetalleFactura" FromRole="Detalle" ToRole="Factura" />
+    <NavigationProperty Name="Producto" Relationship="Self.fkDetalleProducto" FromRole="Detalle" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="Factura">
+    <Key>
+      <PropertyRef Name="pkIdFactura" />
+    </Key>
+    <Property Name="pkIdFactura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fecha" Type="DateTime" Precision="0" />
+    <Property Name="fkIdCliente" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cliente" Relationship="Self.fkFacturaCliente" FromRole="Factura" ToRole="Cliente" />
+    <NavigationProperty Name="Detalle" Relationship="Self.fkDetalleFactura" FromRole="Factura" ToRole="Detalle" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="pkIdProducto" />
+    </Key>
+    <Property Name="pkIdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="precio" Type="Double" />
+    <NavigationProperty Name="Detalle" Relationship="Self.fkDetalleProducto" FromRole="Producto" ToRole="Detalle" />
+  </EntityType>
+  <Association Name="fkFacturaCliente">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="pkIdCliente" />
+      </Principal>
+      <Dependent Role="Factura">
+        <PropertyRef Name="fkIdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkDetalleFactura">
+    <End Role="Factura" Type="Self.Factura" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Factura">
+        <PropertyRef Name="pkIdFactura" />
+      </Principal>
+      <Dependent Role="Detalle">
+        <PropertyRef Name="fkIdFactura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkDetalleProducto">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="pkIdProducto" />
+      </Principal>
+      <Dependent Role="Detalle">
+        <PropertyRef Name="fkIdProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FacturaTestEntity" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+    <EntitySet Name="Detalle" EntityType="Self.Detalle" />
+    <EntitySet Name="Factura" EntityType="Self.Factura" />
+    <EntitySet Name="Producto" EntityType="Self.Producto" />
+    <AssociationSet Name="fkFacturaCliente" Association="Self.fkFacturaCliente">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Factura" EntitySet="Factura" />
+    </AssociationSet>
+    <AssociationSet Name="fkDetalleFactura" Association="Self.fkDetalleFactura">
+      <End Role="Factura" EntitySet="Factura" />
+      <End Role="Detalle" EntitySet="Detalle" />
+    </AssociationSet>
+    <AssociationSet Name="fkDetalleProducto" Association="Self.fkDetalleProducto">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="Detalle" EntitySet="Detalle" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

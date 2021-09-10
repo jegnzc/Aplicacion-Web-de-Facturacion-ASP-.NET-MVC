@@ -1,0 +1,25 @@
+﻿@model TestFacturacionMVC.NETFramework.Models.Cliente
+
+@{
+    ViewBag.Title = "Detalles de Cliente";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Cliente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.pkIdCliente }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>

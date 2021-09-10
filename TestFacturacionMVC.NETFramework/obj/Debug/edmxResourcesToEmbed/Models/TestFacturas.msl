@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FacturaTestModelStoreContainer" CdmEntityContainer="FacturaTestEntity">
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="FacturaTestModel.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="pkIdCliente" ColumnName="pkIdCliente" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Detalle">
+      <EntityTypeMapping TypeName="FacturaTestModel.Detalle">
+        <MappingFragment StoreEntitySet="Detalle">
+          <ScalarProperty Name="pkIdDetalle" ColumnName="pkIdDetalle" />
+          <ScalarProperty Name="fkIdProducto" ColumnName="fkIdProducto" />
+          <ScalarProperty Name="fkIdFactura" ColumnName="fkIdFactura" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Factura">
+      <EntityTypeMapping TypeName="FacturaTestModel.Factura">
+        <MappingFragment StoreEntitySet="Factura">
+          <ScalarProperty Name="pkIdFactura" ColumnName="pkIdFactura" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="fkIdCliente" ColumnName="fkIdCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Producto">
+      <EntityTypeMapping TypeName="FacturaTestModel.Producto">
+        <MappingFragment StoreEntitySet="Producto">
+          <ScalarProperty Name="pkIdProducto" ColumnName="pkIdProducto" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

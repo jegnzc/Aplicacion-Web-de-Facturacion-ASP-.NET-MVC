@@ -1,0 +1,39 @@
+﻿@model TestFacturacionMVC.NETFramework.Models.Detalle
+
+@{
+    ViewBag.Title = "Detalles de Facturas";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Detalle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Id de Factura
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Factura.pkIdFactura)
+        </dd>
+        <dt>
+            Producto
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Producto.nombre)
+        </dd>
+        <dt>
+            Cantidad
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantidad)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.pkIdDetalle }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>

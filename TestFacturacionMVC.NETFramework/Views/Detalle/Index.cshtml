@@ -1,0 +1,46 @@
+﻿@model IEnumerable<TestFacturacionMVC.NETFramework.Models.Detalle>
+
+@{
+    ViewBag.Title = "Detalles de Facturas";
+}
+
+<h2>@ViewBag.Title</h2>
+<p>
+    @Html.ActionLink("Agregar nuevo detalle a factura", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Id de Factura
+        </th>
+        <th>
+            Producto
+        </th>
+        <th>
+            Cantidad
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Factura.pkIdFactura)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Producto.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cantidad)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.pkIdDetalle }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.pkIdDetalle }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.pkIdDetalle })
+            </td>
+        </tr>
+    }
+</table>
